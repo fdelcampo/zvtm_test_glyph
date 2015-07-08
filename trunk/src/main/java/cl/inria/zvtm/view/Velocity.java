@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 
-class Velocity extends Composite{
+public class Velocity extends Composite{
 	
 	static final int Z_VELOCITY = 1;
 	private static final Color TEXT_COLOR = Color.BLACK;
@@ -21,6 +21,7 @@ class Velocity extends Composite{
 	int current_value;
 	int average_value;
 	int max;
+	String text;
 
 	VText label;
 	Bars current;
@@ -29,6 +30,7 @@ class Velocity extends Composite{
 
 	public Velocity(String text){
 
+		this.text = text;
 		max = 50;
 		current_value = 50;
 		average_value = 30;
@@ -59,6 +61,22 @@ class Velocity extends Composite{
 			this.current.setData(this.max, current);
 			this.average.setData(this.max, average);
 		}
+	}
+
+	public int getMax(){
+		return max;
+	}
+
+	public int getCurrent(){
+		return current_value;
+	}
+
+	public int getAverage(){
+		return average_value;
+	}
+
+	public String getText(){
+		return text;
 	}
 
 }

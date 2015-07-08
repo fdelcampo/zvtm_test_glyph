@@ -30,7 +30,7 @@ aspect BarsAutoReplay extends AbstractAutoReplay {
          execution(public int Bars.getVelocity()) ||
          execution(public void Bars.setData(int)) ||
          execution(public void Bars.setData(int, int)) ||
-         execution(public void Velocity.setData(int, int, int)) ||
+         execution(public void Velocity.setData(int, int, int))
         );
 
 }

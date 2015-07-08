@@ -27,7 +27,9 @@ import fr.inria.zvtm.glyphs.VRectangle;
 import fr.inria.zvtm.glyphs.VText;
 */
 
-import cl.inria.zvtm.glyphs.StackBar;
+import fr.inria.zvtm.glyphs.Bars;
+
+import fr.inria.zvtm.glyphs.StackBar;
 
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
@@ -59,7 +61,7 @@ public class WallViewer {
         mView.setAntialiasing(true);
         eh = new WallViewerEvtHld(this);
         mView.setListener(eh, 0);
-        mView.setBackgroundColor(Color.GRAY);
+        mView.setBackgroundColor(Color.LIGHT_GRAY);
         mView.getCursor().setColor(Color.WHITE);
         mView.getCursor().setHintColor(Color.WHITE);
         Vector<Camera> ccameras = new Vector(1);
@@ -78,7 +80,7 @@ public class WallViewer {
                     options.numCols, //use complete
                     options.numRows, //cluster surface
                     ccameras);
-        clusteredView.setBackgroundColor(Color.GRAY);
+        clusteredView.setBackgroundColor(Color.LIGHT_GRAY);
         vsm.addClusteredView(clusteredView);
     }
 
@@ -92,22 +94,67 @@ public class WallViewer {
         mSpace.addGlyph(new VText(0, 0, 0, Color.WHITE, "Hello World!", VText.TEXT_ANCHOR_MIDDLE,4));
         */
 
-        StackBar n = new StackBar(110, 50, 10, 150);
+        /*
+        StackBar n = new StackBar(50, 150, 50, 150);
         mSpace.addGlyph(n);
 
-        
-        n = new StackBar(50, 150, 10, 150);
+        n = new StackBar(70, 100, 50, 150);
         mSpace.addGlyph(n);
         n.move(0, 50);
-                
 
-        n = new StackBar(15, 11, 10, 150);
+        n = new StackBar(120, 100, 50, 150);
+        mSpace.addGlyph(n);
         n.move(0, 100);
+
+        n = new StackBar(150, 100, 50, 150);
+        mSpace.addGlyph(n);
+        n.move(0, 150);
+        */
+
+        /*
+        Bars n = new Bars(0, 0 , 1);
         mSpace.addGlyph(n);
 
-         n = new StackBar(10, 120, 10, 150);
-        n.move(0, 150);
+        n.setData(35, 20);
+
+        n = new Bars(0, 0 , 1);
         mSpace.addGlyph(n);
+
+        n.changeToCurrentBar(false);
+        n.setData(35, 15);
+
+        n = new Bars(0, 50, 1);
+        mSpace.addGlyph(n);
+
+        n.setData(35, 30);
+
+        n = new Bars(0, 50, 1);
+        mSpace.addGlyph(n);
+
+        n.changeToCurrentBar(false);
+        n.setData(35, 35);
+
+        n = new Bars(0, 100, 1);
+        mSpace.addGlyph(n);
+        n.setData(35, 35);
+
+        n = new Bars(0, 100, 1);
+        mSpace.addGlyph(n);
+        n.changeToCurrentBar(false);
+        n.setData(35, 20);
+        */
+
+        Velocity v = new Velocity("Las Condes / Maipu");
+        mSpace.addGlyph(v);
+        v.setData(50, 30, 40);
+        v.move(0d, 50d);
+
+        v = new Velocity("Pte. Alto / Quilicura");
+        mSpace.addGlyph(v);
+        v.setData(50, 50, 36);
+
+        //n.setData(10, 20, 15);
+        //n.update(50, 150, 10, 150);
         
 
     }

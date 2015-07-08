@@ -17,7 +17,7 @@ import fr.inria.zvtm.glyphs.SIRectangle;
 
 public class Bars extends SIRectangle {
 
-	private static final Color CURRENT_COLOR = Color.decode("#0089cc");
+	private static final Color CURRENT_COLOR = Color.decode("#EC5151");//"#ea3a3a");//#0089cc");
 	private static final Color AVERAGE_COLOR = Color.BLACK;
 	private static final Font CHART_FONT = new Font("Arial", Font.PLAIN, 10);
 	private static final Color TEXT_COLOR = Color.BLACK;
