@@ -14,12 +14,14 @@ import fr.inria.zvtm.glyphs.projection.RProjectedCoords;
 
 import fr.inria.zvtm.glyphs.SIRectangle;
 
+import fr.inria.zvtm.engine.VirtualSpaceManager;
+
 
 public class Bars extends SIRectangle {
 
 	private static final Color CURRENT_COLOR = Color.decode("#EC5151");//"#ea3a3a");//#0089cc");
 	private static final Color AVERAGE_COLOR = Color.BLACK;
-	private static final Font CHART_FONT = new Font("Arial", Font.PLAIN, 10);
+	public static final Font CHART_FONT = new Font("Arial", Font.PLAIN, 10);
 	private static final Color TEXT_COLOR = Color.BLACK;
 
 	public static final int MAXWIDTH = 200;
@@ -37,6 +39,7 @@ public class Bars extends SIRectangle {
 	public Bars(double x, double y, int z){
 		super(x, y, z, MAXWIDTH, HEIGHT, CURRENT_COLOR, TEXT_COLOR);
 		this.setDrawBorder(false);
+		this.setTranslucencyValue(1f);
 		//this.setSensitivity(false);
 	}
 
@@ -54,6 +57,7 @@ public class Bars extends SIRectangle {
 	}
 
 	public void setData(int max, int velocity){
+		System.out.println("Bars.setData");
 		if(velocity > max){
 			this.max = velocity;
 		} else {
@@ -64,6 +68,8 @@ public class Bars extends SIRectangle {
 		int widthCurrent = (int)( (float)(velocity)/(float)(max) * MAXWIDTH );
 		widthCurrent = ( widthCurrent % 2 == 0 ) ? widthCurrent : widthCurrent + 1;
 		setWidth(widthCurrent);
+
+		VirtualSpaceManager.INSTANCE.repaint();
 	}
 
 	public int getMax(){

@@ -50,6 +50,8 @@ public class WallViewer {
     private ClusterGeometry withBezels;
     private boolean sceneUnderBezels = true;
 
+    public Dashboard dashboard;
+
     public WallViewer(Options options){
         vsm.setMaster("WallViewer");
         mSpace = vsm.addVirtualSpace("mainSpace");
@@ -144,19 +146,26 @@ public class WallViewer {
         n.setData(35, 20);
         */
 
-        Velocity v = new Velocity("Las Condes / Maipu");
-        mSpace.addGlyph(v);
-        v.setData(50, 30, 40);
-        v.move(0d, 50d);
+        dashboard = new Dashboard(this);
 
-        v = new Velocity("Pte. Alto / Quilicura");
-        mSpace.addGlyph(v);
-        v.setData(50, 50, 36);
+        //dashboard.addVelocity("Las Condes / Maipu", 32, 16, 32);
 
-        //n.setData(10, 20, 15);
-        //n.update(50, 150, 10, 150);
+        
+        //v.setData(50, 50, 36);
+
+        //dashboard.addVelocity("Huechuraba / Peñalolen", 32, 15, 30);
+        //v.setData(50, 15, 30);
+
         
 
+    }
+
+    public int getDisplayWidth(){
+        return VIEW_W;
+    }
+
+    public int getDisplayHeight(){
+        return VIEW_H;
     }
 
     void exit(){

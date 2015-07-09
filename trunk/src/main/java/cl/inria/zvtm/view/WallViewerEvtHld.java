@@ -19,6 +19,8 @@ import fr.inria.zvtm.glyphs.Glyph;
 
 class WallViewerEvtHld extends ViewAdapter {
 
+    public static final String T_DASHBOARD = "Dshbrd";
+
     static float ZOOM_SPEED_COEF = 1.0f/50.0f;
     static double PAN_SPEED_COEF = 50.0;
     static final float WHEEL_ZOOMIN_COEF = 21.0f;
@@ -32,6 +34,9 @@ class WallViewerEvtHld extends ViewAdapter {
 
     boolean panning = false;
 
+    Glyph over = null;
+    int recorridos = 0;
+
     WallViewerEvtHld(WallViewer app){
         this.application = app;
     }
@@ -41,6 +46,9 @@ class WallViewerEvtHld extends ViewAdapter {
         lastJPY = jpy;
         panning = true;
         v.setDrawDrag(true);
+        application.dashboard.addVelocity(Dashboard.RECORRIDOS[recorridos], Dashboard.VELOCIDADES[recorridos][0], Dashboard.VELOCIDADES[recorridos][0], Dashboard.VELOCIDADES[recorridos][1]);
+        recorridos++;
+        recorridos = recorridos%Dashboard.RECORRIDOS.length;
     }
 
     public void release1(ViewPanel v, int mod, int jpx, int jpy, MouseEvent e){
@@ -52,7 +60,12 @@ class WallViewerEvtHld extends ViewAdapter {
     }
 
     public void mouseDragged(ViewPanel v, int mod, int buttonNumber, int jpx, int jpy, MouseEvent e){
-        if (panning){
+        if(over != null){
+            double a = (application.mCamera.focal+Math.abs(application.mCamera.altitude)) / application.mCamera.focal;
+            over.move( (jpx-lastJPX)*(a/PAN_SPEED_COEF), (lastJPY-jpy)*(a/PAN_SPEED_COEF) );
+
+        }
+        else if (panning){
             Camera c = v.cams[0];
             double a = (c.focal+Math.abs(c.altitude))/c.focal;
             application.mCamera.setXspeed((long)((jpx-lastJPX)*(a/PAN_SPEED_COEF)));
@@ -77,10 +90,21 @@ class WallViewerEvtHld extends ViewAdapter {
 
     public void enterGlyph(Glyph g){
         g.highlight(true, null);
+
+        if(g.getType().equals(T_DASHBOARD)){
+            System.out.println("T_DASHBOARD");
+            over = g;
+
+        }
     }
 
     public void exitGlyph(Glyph g){
         g.highlight(false, null);
+
+        if(g.getType().equals(T_DASHBOARD) && panning == false){
+            over = null;
+
+        }
     }
 
     public void viewClosing(View v){
