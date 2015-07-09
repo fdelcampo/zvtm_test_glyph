@@ -42,8 +42,8 @@ class Dashboard extends SIRectangle{
     int CW = MARGIN_LEFT + LABEL_WIDTH + BAR_WIDTH + MARGIN_RIGHT;
     int CH = MARGIN_TOP + 0*LINE_HEIGHT + MARGIN_BOTTOM;// + LINE_HEIGHT;
 
-    public static String[] RECORRIDOS = {"Maipú / Hospital Dipreca", "Pudahuel / Mapocho", "Cerrillos / Recoleta", "San Joaquin / Metro Vespucion Norte", "Santiago de Compostela / Viña del Mar sale al Mundo"};
-	public static int[][] VELOCIDADES = {{35, 42}, {40, 31}, {26, 32}, {55, 44}, {15, 36}};
+    public static String[] RECORRIDOS = {"Maipú / Hospital Dipreca", "Pudahuel / Mapocho", "Cerrillos / Recoleta", "San Joaquin / Metro Vespucion Norte", "Santiago de Compostela / Viña del Mar sale al Mundo" , "La Serena de la nueva Guinea / Marepoto de Sebastian Piñera", "Potossi / Peor es nada"};
+	public static int[][] VELOCIDADES = {{35, 42}, {40, 31}, {26, 32}, {55, 44}, {15, 36}, {90, 120}, {10, 5}};
 
 	public Dashboard(WallViewer app){
 		super(0, 0, Z_DASHBOARD, MARGIN_LEFT + LABEL_WIDTH + BAR_WIDTH + MARGIN_RIGHT, MARGIN_TOP + MARGIN_BOTTOM, DEFAULT_FILL_COLOR, DEFAULT_BORDER_COLOR);
@@ -53,6 +53,8 @@ class Dashboard extends SIRectangle{
 		velocities = new Vector();
 		vs = app.mSpace;
 		vs.addGlyph(this, true);
+		vs.atBottom(this);
+		setTranslucencyValue(0.85f);
 	}
 
 	public void addVelocity(String text){
@@ -63,6 +65,7 @@ class Dashboard extends SIRectangle{
 		//addChild(n);
 		
 		vs.addGlyph(n, false);
+		vs.onTop(n);
 		this.stick(n);
 		redraw();
 	}
@@ -74,6 +77,7 @@ class Dashboard extends SIRectangle{
 		//Dashboard.VELOCITIES_LENGTH = velocities.size();
 		//addChild(n);
 		vs.addGlyph(n, false);
+		vs.onTop(n);
 		this.stick(n);
 		redraw();
 	}

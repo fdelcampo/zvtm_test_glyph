@@ -57,7 +57,6 @@ public class Bars extends SIRectangle {
 	}
 
 	public void setData(int max, int velocity){
-		System.out.println("Bars.setData");
 		if(velocity > max){
 			this.max = velocity;
 		} else {

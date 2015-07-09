@@ -72,7 +72,6 @@ public class Velocity extends Composite{
 	}
 
 	public void setData(int max, int current, int average){
-		System.out.println("Velocity.setData");
 		if(max >= current && max >= average){
 			this.current.setData(max, current);
 			this.average.setData(max, average);
